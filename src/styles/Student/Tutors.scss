@@ -1,0 +1,91 @@
+.tutors{
+  width: 55%;
+  margin: 0 auto;
+
+  &__subtitle{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 15px;
+    color: #B1B1B1;
+  }
+
+  &__list{
+    width: 90%;
+  }
+
+  &__item{
+    padding: 35px;
+    border: 1px solid #dfdfdf;
+    cursor: pointer;
+    border-radius: 25px;
+  }
+
+  &__header{
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  &__icon{
+    width: 86px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+  &__personal{
+    margin-left: 20px;
+  }
+
+  &__name{
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  &__specialty{
+    font-size: 18px;
+    line-height: 22px;
+    color: #B1B1B1;
+  }
+
+  &__message-btn{
+    width: 34px;
+    height: 22px;
+    align-self: flex-start;
+    margin-left: auto;
+    background-image: url("../../img/message-icon.svg");
+    background-color: white;
+    border: none;
+  }
+
+  &__competencies{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__competence{
+    padding: 5px 15px;
+    color: white;
+    background: #FF3D00;
+    border-radius: 34px;
+  }
+
+  &__about-self{
+    font-size: 21px;
+    line-height: 25px;
+    color: #474747;
+    margin-bottom: 15px;
+  }
+
+  &__footer{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__reviews{
+    line-height: 19px;
+    color: #FF3D00;
+  }
+}

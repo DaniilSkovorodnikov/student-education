@@ -1,0 +1,145 @@
+.order{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+
+  &__main{
+    width: 60%;
+  }
+
+  &__experts{
+    width: 30%;
+  }
+
+  &__header{
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  &__title{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  &__edit{
+    width: 22px;
+    height: 25px;
+    border: none;
+    background-color: transparent;
+    background-image: url("../../img/edit-profile-btn.svg");
+    background-position: 50% 50%;
+  }
+
+  &__description{
+    font-size: 21px;
+    line-height: 25px;
+    color: #474747;
+    margin-bottom: 15px;
+  }
+
+  &__learning-type{
+    color: #474747;
+    padding-left: 27px;
+    position: relative;
+    margin-bottom: 25px;
+
+    &::before{
+      content: url("../../img/place-icon.svg");
+      display: block;
+      width: 20px;
+      height: 22px;
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  &__delete{
+    width: 310px;
+    height: 40px;
+    background-color: #ff3d00;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    font-size: 21px;
+    line-height: 25px;
+  }
+}
+
+.experts{
+
+  &__title{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #B1B1B1;
+    margin-bottom: 12px;
+  }
+
+  &__list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__item{
+    width: 100%;
+    border: 1px solid #DFDFDF;
+    border-radius: 25px;
+    padding: 15px 20px;
+  }
+
+  &__header{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  &__avatar{
+    width: 85px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+
+  &__name{
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  &__write{
+    margin-bottom: auto;
+    margin-left: auto;
+    min-width: 37px;
+    height: 23px;
+    background-image: url("../../img/message-icon.svg");
+    background-color: transparent;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    border: none;
+  }
+
+  &__description{
+    font-size: 21px;
+    line-height: 25px;
+    color: #474747;
+    margin-bottom: 20px;
+  }
+
+  &__choose{
+    width: 60%;
+    height: 40px;
+    background-color: #ff3d00;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    font-size: 21px;
+    line-height: 25px;
+  }
+}

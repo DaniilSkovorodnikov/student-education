@@ -1,0 +1,71 @@
+.profile{
+  width: 30%;
+  margin: 0 auto;
+
+  &__main{
+    display: flex;
+    margin-bottom: 30px;
+    gap: 50px;
+    position: relative;
+  }
+
+  &__personal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__name{
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  &__faculty{
+    font-size: 18px;
+    line-height: 22px;
+    color: #B1B1B1;
+  }
+
+  &__avatar{
+    width: 130px;
+    height: 130px;
+  }
+
+  &__edit-btn{
+    background-image: url("../img/edit-profile-btn.svg");
+    width: 21px;
+    height: 25px;
+    background-position: 50% 50%;
+    border: none;
+    background-color: transparent;
+    margin-left: auto;
+  }
+
+  &__field{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  &__subtitle{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    color: #B1B1B1;
+    margin-bottom: 5px;
+  }
+
+  &__divider{
+    width: 100%;
+    height: 1px;
+    background-color: #D9D9D9;
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
+
+  &__value{
+    font-size: 21px;
+    line-height: 25px;
+    color: #474747;
+  }
+}

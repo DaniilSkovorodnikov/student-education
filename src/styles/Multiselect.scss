@@ -1,0 +1,68 @@
+.multiselect{
+
+  &__container{
+    border: 1px solid #474747;
+    border-radius: 25px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  &__option{
+    cursor: default;
+    width: 100%;
+    padding: 5px 20px;
+
+    &.checked{
+      background-color: lightblue;
+    }
+  }
+
+  &__options{
+    margin: 10px auto;
+    box-sizing: border-box;
+    width: 90%;
+    height: 100px;
+    overflow-y: scroll;
+    border-top: 1px solid #B1B1B1;
+    padding: 10px 0;
+  }
+
+  &__values{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  &__input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 35px;
+    border: none;
+    padding-left: 25px;
+    font-size: 21px;
+    line-height: 25px;
+
+    &:focus, :active{
+      outline: none;
+    }
+
+    &::placeholder{
+      color: #B1B1B1;
+    }
+  }
+
+  &__value{
+    display: flex;
+    padding: 5px 10px;
+    background: #FF3D00;
+    border-radius: 16px;
+    color: white;
+  }
+
+  &__delete{
+    background: none;
+    border: none;
+    color: white;
+  }
+}

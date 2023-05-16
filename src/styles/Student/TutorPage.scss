@@ -1,0 +1,86 @@
+.tutor{
+  width: 45%;
+  margin: 0 auto;
+
+  &__header{
+    display: flex;
+    margin-bottom: 20px;
+    align-items: baseline;
+  }
+
+  &__reviews{
+    margin-left: auto;
+    margin-right: 20px;
+    color: #B1B1B1;
+  }
+
+  &__name, &__rate{
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  &__about-self{
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 21px;
+    line-height: 25px;
+    color: #474747;
+  }
+
+  &__competencies{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  &__competence{
+    padding: 5px 15px;
+    color: white;
+    background: #FF3D00;
+    border-radius: 34px;
+  }
+
+  &__field{
+    margin-bottom: 10px;
+  }
+
+  &__subtitle{
+    color: #B1B1B1;
+  }
+
+  &__value{
+    font-size: 21px;
+    line-height: 25px;
+    color: #474747;
+  }
+}
+
+.reviews{
+  margin-top: 65px;
+
+  &__header{
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  &__title{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+    margin-right: 10px;
+  }
+
+  &__count{
+    font-size: 30px;
+    line-height: 36px;
+    color: #B1B1B1;
+  }
+
+  &__divider{
+    width: 100%;
+    height: 1px;
+    background-color: #D9D9D9;
+  }
+}
