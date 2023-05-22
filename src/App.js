@@ -14,6 +14,8 @@ import StudentCreateOrder from "./pages/student/StudentCreateOrder";
 import StudentEditProfilePage from "./pages/student/StudentEditProfilePage";
 import StudentOrderPage from "./pages/student/StudentOrderPage";
 import ProfilePage from "./pages/ProfilePage";
+import ExpertOrders from "./pages/expert/ExpertOrders";
+import StudentMain from "./pages/student/StudentMain";
 
 function App() {
 
@@ -24,21 +26,20 @@ function App() {
                     <Route element={<AuthGuard/>}>
                         <Route element={<UserLayout/>}>
                             <Route path='/' element={<RoleNavigation/>}/>
-                            {/*<Route element={<RoleGuard correctRole='student'/>}>*/}
-
-                                    <Route path='/student' element={<div>Student works</div>}/>
+                            <Route element={<RoleGuard correctRole='student'/>}>
+                                    <Route path='/student' element={<StudentMain/>}/>
                                     <Route path='/student/profile/edit' element={<StudentEditProfilePage/>}/>
                                     <Route path='/tutors' element={<TutorsPage/>}/>
                                     <Route path='/tutor/:id' element={<StudentTutorPage/>}/>
                                     <Route path='/student/orders' element={<StudentOrders/>}/>
                                     <Route path='/student/order/:id' element={<StudentOrderPage/>}/>
                                     <Route path='/student/order/create' element={<StudentCreateOrder/>}/>
-                            {/*</Route>*/}
-                            {/*<Route element={<RoleGuard correctRole='expert'/> }>*/}
-                                    <Route path='/expert' element={<div>Expert works</div>}/>
-                                    <Route path='/expert/profile/edit' element={<div>Expert works</div>}/>
-
-                            {/*</Route>*/}
+                            </Route>
+                            <Route element={<RoleGuard correctRole='expert'/> }>
+                                <Route path='/expert' element={<ExpertOrders/>}/>
+                                <Route path='/expert/profile/edit' element={<div>Expert works</div>}/>
+                                <Route path='/expert/order/:id' element={<ExpertOrders/>}/>
+                            </Route>
                             <Route path={'/profile/:id'} element={<ProfilePage/>}/>
                         </Route>
                     </Route>

@@ -32,10 +32,16 @@ export const getUserInfo = async () => {
 }
 
 export const getUserById = async (id) => {
-    const user = await $http.get(`/api/user/${id}`)
+    const user = await axios.get(`${API_URL}/api/user/${id}`)
     return user.data
 }
 
 export const getGender = (value) => {
     return value === 'male' ? 'Мужской': 'Женский'
+}
+
+export const RuEducationStage = {
+    'bachelor': 'Бакалавр',
+    'specialty': 'Специалитет',
+    'magistracy': 'Магистратура'
 }

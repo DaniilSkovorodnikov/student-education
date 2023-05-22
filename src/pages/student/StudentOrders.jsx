@@ -1,16 +1,19 @@
 import '../../styles/Student/StudentOrders.scss'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-
-const initialOrders = [
-    {title: 'Интегралы', description: 'Определенные и неопределенные интегралы, подготовка к контрольной работе. Учусь на втором курсе у Поторочиной.'},
-    {title: 'Теория вероятностей экзамен', description: 'Хочу повторить все темы третьего семестра по теории вероятности. Особенно интересно про формулу Байеса и Бернулли.'}
-]
+import {getOrdersByToken} from "../../helpers/OrderHelper";
 
 export default function StudentOrders(){
-    const [orders, setOrders] = useState(initialOrders)
+    const [orders, setOrders] = useState([])
     const [titleFilter, setTitleFilter] = useState('')
     const navigate = useNavigate()
+
+    useEffect(() => {
+        getOrdersByToken()
+            .then((value) => {
+                setOrders(value)
+            })
+    }, [])
 
     return (
         <div className='orders'>
@@ -26,11 +29,12 @@ export default function StudentOrders(){
             </div>
             <ul className='orders__list'>
                 {orders
-                    .filter((value) => value.title.toLowerCase().includes(titleFilter.toLowerCase()))
+                    .filter((value) => value.name.toLowerCase().includes(titleFilter.toLowerCase()))
                     .map((v, i) =>
-                    <li className='orders__item' key={i} onClick={() => navigate(`/student/order/${i}`)}>
-                        <h2 className='orders__subtitle'>{v.title}</h2>
+                    <li className='orders__item' key={i} onClick={() => navigate(`/student/order/${v.id}`)}>
+                        <h2 className='orders__subtitle'>{v.name}</h2>
                         <p className='orders__description'>{v.description}</p>
+                        <p className='orders__learning-type'>{v.learning_type}</p>
                     </li>
                 )}
             </ul>

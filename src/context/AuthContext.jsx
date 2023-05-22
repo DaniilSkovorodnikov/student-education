@@ -37,6 +37,7 @@ export const AuthProvider = ({children}) => {
                 setToken(user.token)
                 setRole(user.role)
                 localStorage.setItem('token', user.token)
+                setIsLoading(false)
                 navigate(`/${user.role}`)
             })
     }

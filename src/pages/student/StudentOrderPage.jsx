@@ -1,16 +1,26 @@
 import '../../styles/Student/StudentOrderPage.scss'
 import avatar from '../../img/avatar.jpg'
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {getOrderById} from "../../helpers/OrderHelper";
 
 export default function StudentOrderPage(){
+    const [order, setOrder] = useState({})
+    const {id} = useParams()
+    useEffect(() => {
+        getOrderById(id)
+            .then((value) => setOrder(value))
+    }, [])
+
     return (
         <div className='order'>
             <div className="order__main">
                 <div className="order__header">
-                    <h2 className="order__title">Интегралы</h2>
+                    <h2 className="order__title">{order.name}</h2>
                     <button className='order__edit'/>
                 </div>
-                <p className="order__description">Определенные и неопределенные интегралы, подготовка к контрольной работе. Учусь на втором курсе у Поторочиной.</p>
-                <p className='order__learning-type'>Очно или онлайн</p>
+                <p className="order__description">{order.description}</p>
+                <p className='order__learning-type'>{order.learning_type}</p>
                 <button className='order__delete'>Закрыть задание</button>
             </div>
             <div className="order__experts experts">

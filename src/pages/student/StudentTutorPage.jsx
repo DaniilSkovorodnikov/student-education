@@ -1,16 +1,15 @@
 import {useParams} from "react-router-dom";
 import '../../styles/Student/TutorPage.scss'
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {API_URL} from "../../http/http";
+import {getUserById, RuEducationStage} from "../../helpers/UserHelper";
 
 export default function StudentTutorPage(){
     const {id} = useParams()
     const [tutor, setTutor] = useState({})
 
     useEffect(() => {
-        axios.get(`${API_URL}/api/user/${id}`)
-            .then((value) => setTutor(value.data))
+        getUserById(id)
+            .then((value) => setTutor(value))
     })
 
     return (
@@ -27,10 +26,7 @@ export default function StudentTutorPage(){
                 {tutor.about_self}
             </p>
             <ul className="tutor__competencies">
-                {tutor.competencies?.map((v, i) => <li className="tutor__competence" key={i}>Векторный анализ</li>)}
-
-                <li className="tutor__competence">Теория вероятностей</li>
-                <li className="tutor__competence">Физика</li>
+                {tutor.competencies?.map((v, i) => <li className="tutor__competence" key={i}>{v}</li>)}
             </ul>
             <div className="tutor__field">
                 <div className="tutor__subtitle">Направление обучения</div>
@@ -38,7 +34,7 @@ export default function StudentTutorPage(){
             </div>
             <div className="tutor__field">
                 <div className="tutor__subtitle">Курс</div>
-                <div className="tutor__value">{tutor.education_stage}, {tutor.course_number}</div>
+                <div className="tutor__value">{RuEducationStage[tutor.education_stage]}, {tutor.course_number}</div>
             </div>
             <div className="tutor__reviews-list reviews">
                 <div className="reviews__header">

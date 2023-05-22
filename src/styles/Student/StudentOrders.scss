@@ -1,6 +1,7 @@
 .orders{
   width: 55%;
   margin: 0 auto;
+  padding-bottom: 50px;
 
   &__filter{
     width: 100%;
@@ -51,11 +52,28 @@
     font-weight: 500;
     font-size: 30px;
     line-height: 36px;
+    margin-bottom: 10px;
   }
 
   &__description{
     font-size: 21px;
     line-height: 25px;
     color: #474747;
+  }
+
+  &__learning-type{
+    color: #474747;
+    padding-left: 27px;
+    position: relative;
+    margin-top: 10px;
+
+    &::before{
+      content: url("../../img/place-icon.svg");
+      display: block;
+      width: 20px;
+      height: 22px;
+      position: absolute;
+      left: 0;
+    }
   }
 }
