@@ -5,7 +5,15 @@
   &__header{
     display: flex;
     margin-bottom: 20px;
-    align-items: baseline;
+    align-items: center;
+  }
+
+  &__icon{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 30px;
   }
 
   &__reviews{
@@ -21,8 +29,6 @@
   }
 
   &__about-self{
-    margin-top: 25px;
-    margin-bottom: 10px;
     font-size: 21px;
     line-height: 25px;
     color: #474747;
@@ -47,6 +53,7 @@
   }
 
   &__subtitle{
+    font-weight: 400;
     color: #B1B1B1;
   }
 

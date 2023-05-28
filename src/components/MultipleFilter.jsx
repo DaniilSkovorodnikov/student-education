@@ -1,21 +1,38 @@
 import '../styles/Multifilter.scss'
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
-export default function MultipleFilter({options, onChangeSetter, name, placeholder}){
-    const [values, setValues] = useState([])
+function useOutsideClick(elementRef, handler, attached = true){
+    useEffect(() => {
+        if (!attached) return
+        const handleClick = (e) => {
+            if (!elementRef.current) return;
+            if (!elementRef.current.contains(e.target)){
+                handler();
+            }
+        }
+        document.addEventListener('click', handleClick)
+        return () => {
+            document.removeEventListener('click', handleClick)
+        }
+    }, [elementRef, handler, attached])
+}
+
+export default function MultipleFilter({options, onChangeSetter, value, name, placeholder}){
     const [isActive, setIsActive] = useState(false)
+    const elementRef = useRef(null)
+
+    useOutsideClick(elementRef, () => setIsActive(false), isActive)
 
     return (
-        <div className='multifilter' onClick={() => setIsActive(!isActive)}>
-            <div className="multifilter__values">{values.length > 0 ? values.join(', '): placeholder}</div>
+        <div className='multifilter' onClick={() => setIsActive(!isActive)} ref={elementRef}>
+            <div className="multifilter__values">{value.length > 0 ? value.join(', '): placeholder}</div>
             <div className={["multifilter__dropdown", isActive && 'active'].join(' ')}>
                 <ul className="multifilter__list">
-                    {options.map((v,i) => <li key={i} className={['multifilter__value', values.includes(v) && 'selected'].join(' ')} onClick={(e) => {
+                    {options.map((v,i) => <li key={i} className={['multifilter__value', value.includes(v) && 'selected'].join(' ')} onClick={(e) => {
                         e.stopPropagation()
-                        const updatedValues = values.includes(v) ?
-                            [...values.filter((value) => value !== v)] :
-                            [...values, v]
-                        setValues(updatedValues)
+                        const updatedValues = value.includes(v) ?
+                            [...value.filter((value) => value !== v)] :
+                            [...value, v]
                         onChangeSetter(prev => ({
                             ...prev,
                             [name]: updatedValues

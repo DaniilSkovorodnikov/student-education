@@ -1,6 +1,7 @@
 import '../../styles/Authorization.scss'
 import student_img from '../../img/student.png'
 import tutor_img from '../../img/tutor.png'
+import avatar_field from '../../img/avatar.jpg'
 import {useForm} from "react-hook-form";
 import {useContext, useEffect, useMemo, useState} from "react";
 import MultiSelect from "../../components/MultiSelect";
@@ -14,6 +15,12 @@ export default function RegistrationPage(){
     const [trajectories, setTrajectories] = useState([])
     const [competencies, setCompetencies] = useState([]);
     const [selectedCompetencies, setSelectedCompetencies] = useState([]);
+    const [img, setImg] = useState('')
+    const fileReader = useMemo(() => {
+        const reader = new FileReader()
+        reader.onloadend = (ev) => setImg(reader.result)
+        return reader
+    }, [])
     const mainForm = useForm({
         mode: 'onBlur'
     });
@@ -22,6 +29,7 @@ export default function RegistrationPage(){
         const user = {
             ...data,
             role,
+            image: img,
             course_number: data.course_number > 5 ? data.course_number % 5 : data.course_number,
             education_stage: getEducationStage(data.course_number)
         }
@@ -127,6 +135,16 @@ export default function RegistrationPage(){
                 {(registrationStage === 'student' || registrationStage === 'expert') && <div className='registration__container'>
                     <h2 className="registration__title">Немного обо мне</h2>
                     <p className="registration__part">3/3</p>
+                    <label className='registration__img-field'>
+                        <img src={img || avatar_field} className='registration__img'/>
+                        <input type="file"
+                               className='registration__img-input'
+                               onChange={(e) => {
+                                   fileReader.readAsDataURL(e.target.files[0])
+                               }}
+                        />
+                    </label>
+
                     <div className="registration__control">
                         <input type="text"
                                className="login__input"

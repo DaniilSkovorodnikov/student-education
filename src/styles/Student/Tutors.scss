@@ -1,5 +1,5 @@
 .tutors{
-  width: 55%;
+  width: 50%;
   margin: 0 auto;
 
   &__subtitle{
@@ -25,12 +25,14 @@
   &__header{
     display: flex;
     margin-bottom: 20px;
+    align-items: center;
   }
 
   &__icon{
-    width: 86px;
-    height: auto;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
+    object-fit: cover;
   }
 
   &__personal{

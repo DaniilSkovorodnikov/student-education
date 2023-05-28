@@ -1,5 +1,6 @@
 import {useParams} from "react-router-dom";
 import '../../styles/Student/TutorPage.scss'
+import avatar from '../../img/avatar.jpg'
 import {useEffect, useState} from "react";
 import {getUserById, RuEducationStage} from "../../helpers/UserHelper";
 
@@ -9,31 +10,35 @@ export default function StudentTutorPage(){
 
     useEffect(() => {
         getUserById(id)
-            .then((value) => setTutor(value))
-    })
+            .then((value) => {
+                console.log(value)
+                setTutor(value)
+            })
+    }, [])
 
     return (
         <div className='tutor'>
             <div className="tutor__header">
-                <img src="../../img/profile.png" alt="" className="tutors__icon"/>
+                <img src={tutor.image || avatar} alt="" className="tutor__icon"/>
                 <div className="tutor__personal">
                     <h3 className="tutor__name">{tutor.name}</h3>
                 </div>
                 <p className="tutor__reviews">0 отзывов</p>
                 <p className='tutor__rate'>0.0</p>
             </div>
-            <p className="tutor__about-self">
-                {tutor.about_self}
-            </p>
+            <div className='tutor__field'>
+                <h3 className="tutor__subtitle">О себе</h3>
+                <p className="tutor__about-self">{tutor.about_self}</p>
+            </div>
             <ul className="tutor__competencies">
                 {tutor.competencies?.map((v, i) => <li className="tutor__competence" key={i}>{v}</li>)}
             </ul>
             <div className="tutor__field">
-                <div className="tutor__subtitle">Направление обучения</div>
+                <h3 className="tutor__subtitle">Направление обучения</h3>
                 <div className="tutor__value">{tutor.learning_trajectory}</div>
             </div>
             <div className="tutor__field">
-                <div className="tutor__subtitle">Курс</div>
+                <h3 className="tutor__subtitle">Курс</h3>
                 <div className="tutor__value">{RuEducationStage[tutor.education_stage]}, {tutor.course_number}</div>
             </div>
             <div className="tutor__reviews-list reviews">

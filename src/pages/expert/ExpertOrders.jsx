@@ -24,7 +24,6 @@ export default function ExpertOrders(){
         trajectories: [],
         courses: [],
         learning_type: '',
-        sex: ''
     })
 
     const scrollHandler = useCallback(() => {
@@ -35,10 +34,10 @@ export default function ExpertOrders(){
     const debouncedListener = useCallback(() => { debounce(scrollHandler) }, [])
 
     useEffect(() => {
-        // getCompetencies()
-        //     .then((value) => setSubjects(value))
-        // getTrajectories()
-        //     .then((value) => setTrajectories(value))
+        getCompetencies()
+            .then((value) => setSubjects(value))
+        getTrajectories()
+            .then((value) => setTrajectories(value))
         document.addEventListener('scroll', debouncedListener)
         return () => {
             document.removeEventListener('scroll', debouncedListener)
@@ -61,44 +60,27 @@ export default function ExpertOrders(){
         <div className='expert'>
             <div className='orders'>
                 <div className="orders__filters filters">
-                    <MultipleFilter options={subjects} onChangeSetter={setFilters} name={'subjects'} placeholder='По всем предметам'/>
-                    <MultipleFilter options={trajectories} onChangeSetter={setFilters} name={'trajectories'} placeholder='Направление подготовки репетитора'/>
-                    <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} name={'courses'} placeholder='Курс репетитора'/>
+                    <MultipleFilter options={subjects} onChangeSetter={setFilters} value={filters.subjects} name={'subjects'} placeholder='По всем темам'/>
+                    <MultipleFilter options={trajectories} onChangeSetter={setFilters} value={filters.trajectories} name={'trajectories'} placeholder='Направление подготовки репетитора'/>
+                    <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} value={filters.courses} name={'courses'} placeholder='Курс репетитора'/>
                     <div className="filters__field">
                         <h3 className='filters__subtitle'>Формат взаимодействия</h3>
                         <label className='filters__label'>
                             <input type='radio'
                                    name='learning_type'
-                                   value='full-time'
+                                   value='Очно'
                                    className='filters__checkbox'
-                                   onChange={(e) => setFilters({...filters, learning_type: e.target.value})}/> Очно
+                                   onChange={(e) => setFilters({...filters, learning_type: e.target.value})}
+                                   checked={filters.learning_type && filters.learning_type === 'Очно'}/> Очно
                         </label>
                         <label className='filters__label'>
                             <input type='radio'
                                    name='learning_type'
-                                   value='online'
+                                   value='Онлайн'
                                    className='filters__checkbox'
-                                   onChange={(e) => setFilters({...filters, learning_type: e.target.value})}/>
+                                   onChange={(e) => setFilters({...filters, learning_type: e.target.value})}
+                                   checked={filters.learning_type && filters.learning_type === 'Онлайн'}/>
                             Онлайн
-                        </label>
-                    </div>
-                    <div className="filters__field">
-                        <h3 className='filters__subtitle'>Пол репетитора</h3>
-                        <label className='filters__label'>
-                            <input type='radio'
-                                   name='sex'
-                                   value='male'
-                                   className='filters__checkbox'
-                                   onChange={(e) => setFilters({...filters, sex: e.target.value})}
-                            /> Мужской
-                        </label>
-                        <label className='filters__label'>
-                            <input type='radio'
-                                   name='sex'
-                                    value='female'
-                                   className='filters__checkbox'
-                                   onChange={(e) => setFilters({...filters, sex: e.target.value})}
-                            /> Женский
                         </label>
                     </div>
                     <button onClick={() => setFilters({
@@ -110,17 +92,27 @@ export default function ExpertOrders(){
                     })}>Сбросить фильтры</button>
                 </div>
                 <ul className='orders__list'>
-                    {orders.map((v, i) =>
+                    {orders
+                        .filter((value) => {
+                            const subjectsFilter = filters.subjects.length === 0 || filters.subjects.some((v) => value.name === v)
+                            const courseFilter = filters.courses.length === 0 || filters.courses.includes(value.course_number)
+                            const learningTypeFilter = !filters.learning_type || filters.learning_type === value.learning_type
+                            return subjectsFilter && courseFilter && learningTypeFilter
+                        })
+                        .map((v, i) =>
                         <li className='orders__item' key={i}>
-                            <div className="orders__left">
+                            <div className="orders__header">
                                 <h3 className="orders__subtitle">{v.name}</h3>
                                 <p className="orders__description">{v.description}</p>
-                                <p>{v.price} &#8381;</p>
+
                             </div>
-                            <button className="orders__respond" onClick={() => {
-                                setVisible(true)
-                                setCurrentOrder(v.id)
-                            }}>Откликнуться</button>
+                            <div className="orders__footer">
+                                <p className='orders__price'>{v.price} &#8381;</p>
+                                <button className="orders__respond" onClick={() => {
+                                    setVisible(true)
+                                    setCurrentOrder(v.id)
+                                }}>Откликнуться</button>
+                            </div>
                         </li>
                     )}
                 </ul>

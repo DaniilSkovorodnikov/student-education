@@ -6,7 +6,7 @@ import avatar from "../img/avatar.jpg";
 import {getGender} from "../helpers/UserHelper";
 
 export default function ProfilePage(){
-    const {user, role} = useContext(AuthContext)
+    const {user, role, logout} = useContext(AuthContext)
     const navigate = useNavigate()
 
     return (
@@ -58,6 +58,7 @@ export default function ProfilePage(){
                     </ul>
                 </div> }
             </div>
+            <p className='profile__exit'>Вы можете <span className='profile__link' onClick={logout}>выйти из аккаунта</span></p>
         </div>
     )
 }

@@ -26,7 +26,7 @@
 
   &__links{
     display: flex;
-    gap: 30px;
+    gap: 50px;
   }
 
   &__link:last-child{
@@ -67,30 +67,13 @@
       transition: 250ms ease;
     }
   }
-
-  &__top-menu{
-    position: absolute;
-    bottom: -170px;
-    right: 0;
-    background: #F7F7F7;
-    border-radius: 25px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-.top-menu__link{
-  text-decoration: none;
-  color: #474747;
 }
 
 .main{
   width: 100%;
 
   &__toggle{
-    width: 55%;
+    width: 50%;
     margin: 0 auto 30px;
     display: flex;
     gap: 20px;
@@ -108,4 +91,8 @@
       text-underline-position: under;
     }
   }
+}
+
+.layout{
+  padding-bottom: 40px;
 }

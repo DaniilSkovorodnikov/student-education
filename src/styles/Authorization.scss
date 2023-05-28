@@ -143,6 +143,36 @@ textarea{
     justify-content: space-around;
     width: 100%;
   }
+
+  &__img{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  &__img-field{
+    align-self: center;
+    margin-bottom: 20px;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+
+    &::after{
+      content: url("../img/add-img.svg");
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
+  }
+
+  &__img-input{
+    display: none;
+  }
 }
 
 .role-card{

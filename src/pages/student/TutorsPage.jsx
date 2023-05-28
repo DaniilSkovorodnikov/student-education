@@ -1,5 +1,6 @@
 import '../../styles/Student/Tutors.scss'
 import '../../styles/Filters.scss'
+import avatar from '../../img/avatar.jpg'
 import {useEffect, useState} from "react";
 import $http from "../../http/http";
 import {useNavigate} from "react-router-dom";
@@ -14,8 +15,8 @@ export default function TutorsPage(){
         subjects: [],
         trajectories: [],
         courses: [],
-        learning_types: [],
-        sex: []
+        learning_type: '',
+        sex: ''
     })
     const navigate = useNavigate()
 
@@ -34,64 +35,72 @@ export default function TutorsPage(){
     return (
         <div className='tutors'>
             <div className="tutors__filters filters">
-                <MultipleFilter options={subjects} onChangeSetter={setFilters} name={'subjects'} placeholder='По всем предметам'/>
-                <MultipleFilter options={trajectories} onChangeSetter={setFilters} name={'trajectories'} placeholder='Направление подготовки репетитора'/>
-                <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} name={'courses'} placeholder='Курс репетитора'/>
+                <MultipleFilter options={subjects} onChangeSetter={setFilters} value={filters.subjects} name={'subjects'} placeholder='По всем темам'/>
+                <MultipleFilter options={trajectories} onChangeSetter={setFilters} value={filters.trajectories} name={'trajectories'} placeholder='Направление подготовки репетитора'/>
+                <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} value={filters.courses} name={'courses'} placeholder='Курс репетитора'/>
                 <div className="filters__field">
                     <h3 className='filters__subtitle'>Формат взаимодействия</h3>
                     <label className='filters__label'>
-                        <input type='checkbox'
+                        <input type='radio'
+                               name='learning-type'
                                value='full-time'
                                className='filters__checkbox'
-                               onChange={(e) => {
-                                   filters.learning_types.includes(e.target.value) ?
-                                       setFilters({...filters, learning_types: [...filters.learning_types.filter((value) => value !== e.target.value)]}) :
-                                       setFilters({...filters, learning_types: [...filters.learning_types, e.target.value]})
-                               }}/> Очно
+                               onChange={(e) => setFilters({...filters, learning_type: e.target.value})}
+                               checked={filters.learning_type && filters.learning_type === 'full-time'}
+                        /> Очно
                     </label>
                     <label className='filters__label'>
-                        <input type='checkbox'
+                        <input type='radio'
+                               name='learning-type'
                                value='online'
                                className='filters__checkbox'
-                               onChange={(e) => {
-                                   filters.learning_types.includes(e.target.value) ?
-                                       setFilters({...filters, learning_types: [...filters.learning_types.filter((value) => value !== e.target.value)]}) :
-                                       setFilters({...filters, learning_types: [...filters.learning_types, e.target.value]})
-                               }}/>
+                               onChange={(e) => setFilters({...filters, learning_type: e.target.value})}
+                               checked={filters.learning_type && filters.learning_type === 'online'}
+                        />
                          Онлайн
                     </label>
                 </div>
                 <div className="filters__field">
                     <h3 className='filters__subtitle'>Пол репетитора</h3>
                     <label className='filters__label'>
-                        <input type='checkbox'
+                        <input type='radio'
+                               name='sex'
                                value='male'
                                className='filters__checkbox'
-                               onChange={(e) => {
-                                   filters.sex.includes(e.target.value) ?
-                                       setFilters({...filters, sex: [...filters.sex.filter((value) => value !== e.target.value)]}) :
-                                       setFilters({...filters, sex: [...filters.sex, e.target.value]})
-                               }}
+                               onChange={(e) => setFilters({...filters, sex: e.target.value})}
+                               checked={filters.sex && filters.sex === 'male'}
                         /> Мужской
                     </label>
                     <label className='filters__label'>
-                        <input type='checkbox'
+                        <input type='radio'
+                               name='sex'
                                value='female'
                                className='filters__checkbox'
-                               onChange={(e) => {
-                                   filters.sex.includes(e.target.value) ?
-                                       setFilters({...filters, sex: [...filters.sex.filter((value) => value !== e.target.value)]}) :
-                                       setFilters({...filters, sex: [...filters.sex, e.target.value]})
-                               }}
+                               onChange={(e) => setFilters({...filters, sex: e.target.value})}
+                               checked={filters.sex && filters.sex === 'female'}
                         /> Женский
                     </label>
                 </div>
+                <button onClick={() => setFilters({
+                    subjects: [],
+                    trajectories: [],
+                    courses: [],
+                    learning_type: '',
+                    sex: ''
+                })}>Сбросить фильтры</button>
             </div>
             <ul className='tutors__list'>
-                {tutors.map((v,i) =>
+                {tutors
+                    .filter((value) => {
+                        const subjectsFilter = filters.subjects.length === 0 || filters.subjects.some((v) => value.competencies.includes(v))
+                        const trajectoryFilter = filters.trajectories.length === 0 || filters.trajectories.includes(value.learning_trajectory)
+                        const courseFilter = filters.courses.length === 0 || filters.courses.includes(value.course_number)
+                        return subjectsFilter && trajectoryFilter && courseFilter
+                    })
+                    .map((v,i) =>
                     <li className='tutors__item' onClick={() => navigate(`/tutor/${v.id}`)} key={i}>
                         <div className="tutors__header">
-                            <img src="../../img/profile.png" alt="" className="tutors__icon"/>
+                            <img src={v.image || avatar} alt="" className="tutors__icon"/>
                             <div className="tutors__personal">
                                 <h3 className="tutors__name">{v.name}</h3>
                                 <p className="tutors__specialty">{v.learning_trajectory}</p>
