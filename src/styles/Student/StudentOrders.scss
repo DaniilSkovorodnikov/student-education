@@ -1,79 +1,70 @@
-.orders{
-  width: 55%;
-  margin: 0 auto;
-  padding-bottom: 50px;
+.student{
+  .orders {
+    width: 55%;
+    margin: 0 auto;
+    padding-bottom: 50px;
 
-  &__filter{
-    width: 100%;
-    height: 85px;
-    padding-left: 35px;
-    border-radius: 25px;
-    border: 1px solid #B1B1B1;
-    font-size: 30px;
-    margin-bottom: 40px;
 
-    &::placeholder{
+    &__header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    &__create {
+      color: white;
+      border: none;
+      background-color: #ff3d00;
+      height: 40px;
+      font-family: inherit;
+      width: 185px;
+      border-radius: 35px;
+      font-size: 18px;
+    }
+
+    &__title {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
       color: #B1B1B1;
     }
-  }
 
-  &__header{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
+    &__item {
+      padding: 25px 30px;
+      border: 1px solid #B1B1B1;
+      border-radius: 25px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
 
-  &__create{
-    color: white;
-    border: none;
-    background-color: #ff3d00;
-    height: 30px;
-    font-family: inherit;
-  }
+    &__subtitle {
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 36px;
+      margin-bottom: 10px;
+    }
 
-  &__title{
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #B1B1B1;
-  }
+    &__description {
+      font-size: 21px;
+      line-height: 25px;
+      color: #474747;
+    }
 
-  &__item{
-    padding: 25px 30px;
-    border: 1px solid #B1B1B1;
-    border-radius: 25px;
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
+    &__learning-type {
+      color: #474747;
+      padding-left: 27px;
+      position: relative;
+      margin-top: 10px;
 
-  &__subtitle{
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 36px;
-    margin-bottom: 10px;
-  }
-
-  &__description{
-    font-size: 21px;
-    line-height: 25px;
-    color: #474747;
-  }
-
-  &__learning-type{
-    color: #474747;
-    padding-left: 27px;
-    position: relative;
-    margin-top: 10px;
-
-    &::before{
-      content: url("../../img/place-icon.svg");
-      display: block;
-      width: 20px;
-      height: 22px;
-      position: absolute;
-      left: 0;
+      &::before {
+        content: url("../../img/place-icon.svg");
+        display: block;
+        width: 20px;
+        height: 22px;
+        position: absolute;
+        left: 0;
+      }
     }
   }
 }

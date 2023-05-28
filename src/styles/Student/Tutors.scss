@@ -89,4 +89,13 @@
     line-height: 19px;
     color: #FF3D00;
   }
+
+  &__filters{
+    width: 15%;
+    position: absolute;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 }

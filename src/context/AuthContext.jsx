@@ -29,17 +29,19 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     async function login(user){
-        axios.post(`${API_URL}/api/auth/login`, {user})
+        return axios.post(`${API_URL}/api/auth/login`, {user})
             .then((value) => {
                 const user = value.data.user
                 getUserInfo()
                     .then((userInfo) => setUser(userInfo))
+                    .catch((err) => { throw err })
                 setToken(user.token)
                 setRole(user.role)
                 localStorage.setItem('token', user.token)
                 setIsLoading(false)
                 navigate(`/${user.role}`)
             })
+            .catch((err) => { throw err})
     }
 
     async function register(user){
@@ -49,8 +51,16 @@ export const AuthProvider = ({children}) => {
             })
     }
 
+    function logout() {
+        localStorage.removeItem('token')
+        setRole('')
+        setToken('')
+        setUser({})
+        navigate('/login')
+    }
+
     return (
-        <AuthContext.Provider value={{isLoading, role, token, user, login, register}}>
+        <AuthContext.Provider value={{isLoading, role, token, user, login, register, logout}}>
             {children}
         </AuthContext.Provider>
     )

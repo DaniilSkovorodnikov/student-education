@@ -33,10 +33,10 @@ export default function StudentCreateOrder(){
             <div className="create-order__control">
                 <p className="create-order__subtitle">Мне удобно заниматься...</p>
                 <label>
-                    <input type="checkbox" value='full-time' {...register('learning_type')}/> Очно
+                    <input type="checkbox" value='full-time' {...register('learning_type', {required: true})}/> Очно
                 </label>
                 <label>
-                    <input type="checkbox" value='online' {...register('learning_type')}/> Онлайн
+                    <input type="checkbox" value='online' {...register('learning_type', {required: true})}/> Онлайн
                 </label>
             </div>
             <div className="create-order__control">

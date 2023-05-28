@@ -16,6 +16,7 @@ import StudentOrderPage from "./pages/student/StudentOrderPage";
 import ProfilePage from "./pages/ProfilePage";
 import ExpertOrders from "./pages/expert/ExpertOrders";
 import StudentMain from "./pages/student/StudentMain";
+import ExpertMain from "./pages/expert/ExpertMain";
 
 function App() {
 
@@ -24,8 +25,8 @@ function App() {
             <AuthProvider>
                 <Routes>
                     <Route element={<AuthGuard/>}>
+                        <Route path='/' element={<RoleNavigation/>}/>
                         <Route element={<UserLayout/>}>
-                            <Route path='/' element={<RoleNavigation/>}/>
                             <Route element={<RoleGuard correctRole='student'/>}>
                                     <Route path='/student' element={<StudentMain/>}/>
                                     <Route path='/student/profile/edit' element={<StudentEditProfilePage/>}/>
@@ -36,7 +37,7 @@ function App() {
                                     <Route path='/student/order/create' element={<StudentCreateOrder/>}/>
                             </Route>
                             <Route element={<RoleGuard correctRole='expert'/> }>
-                                <Route path='/expert' element={<ExpertOrders/>}/>
+                                <Route path='/expert' element={<ExpertMain/>}/>
                                 <Route path='/expert/profile/edit' element={<div>Expert works</div>}/>
                                 <Route path='/expert/order/:id' element={<ExpertOrders/>}/>
                             </Route>

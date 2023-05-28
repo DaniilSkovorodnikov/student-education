@@ -8,7 +8,7 @@
   &__logo{
     width: 110px;
     height: 35px;
-    background-image: url("../../img/logo.png");
+    background-image: url("../img/logo.png");
     border: none;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -43,11 +43,11 @@
     border: none;
 
     &.message-btn{
-      background-image: url("../../img/message.svg");
+      background-image: url("../img/message.svg");
     }
 
     &.profile-btn{
-      background-image: url("../../img/profile.png");
+      background-image: url("../img/profile.png");
       background-size: 100% 100%;
     }
   }
@@ -56,7 +56,7 @@
     display: block;
     width: 17px;
     height: 9px;
-    background-image: url("../../img/top-menu-arrow.svg");
+    background-image: url("../img/top-menu-arrow.svg");
     border: none;
     background-color: transparent;
     align-self: center;
@@ -70,7 +70,7 @@
 
   &__top-menu{
     position: absolute;
-    bottom: -135px;
+    bottom: -170px;
     right: 0;
     background: #F7F7F7;
     border-radius: 25px;
@@ -84,4 +84,28 @@
 .top-menu__link{
   text-decoration: none;
   color: #474747;
+}
+
+.main{
+  width: 100%;
+
+  &__toggle{
+    width: 55%;
+    margin: 0 auto 30px;
+    display: flex;
+    gap: 20px;
+  }
+
+  &__changer{
+    font-weight: 300;
+    font-size: 23px;
+    line-height: 28px;
+    cursor: pointer;
+
+    &.active{
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+  }
 }

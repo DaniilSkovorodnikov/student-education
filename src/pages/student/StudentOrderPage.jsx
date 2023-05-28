@@ -24,7 +24,7 @@ export default function StudentOrderPage(){
                 <button className='order__delete'>Закрыть задание</button>
             </div>
             <div className="order__experts experts">
-                <h2 className='experts__title'>Предложения</h2>
+                <h2 className='experts__title'>Отклики репетиторов</h2>
                 <ul className='experts__list'>
                     <li className="experts__item">
                         <div className="experts__header">
@@ -36,7 +36,8 @@ export default function StudentOrderPage(){
                             <button className='experts__write'/>
                         </div>
                         <p className='experts__description'>Привет! Я неплохо разобрался в интегралах в прошлом семестре и могу на свежую голову все объяснить простым языком. </p>
-                        <button className="experts__choose">Выбрать эксперта</button>
+                        <button className="experts__choose">Принять</button>
+                        <button className="experts__choose">Отклонить</button>
                     </li>
                     <li className="experts__item">
                         <div className="experts__header">
@@ -48,7 +49,8 @@ export default function StudentOrderPage(){
                             <button className='experts__write'/>
                         </div>
                         <p className='experts__description'>Привет! Я неплохо разобрался в интегралах в прошлом семестре и могу на свежую голову все объяснить простым языком. </p>
-                        <button className="experts__choose">Выбрать эксперта</button>
+                        <button className="experts__choose">Принять</button>
+                        <button className="experts__choose">Отклонить</button>
                     </li>
                 </ul>
             </div>

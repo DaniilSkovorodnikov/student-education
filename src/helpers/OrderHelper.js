@@ -29,3 +29,19 @@ export async function getOrderById(id){
         throw e
     }
 }
+
+export async function getOrdersByPage(page){
+    const data = await $http.get(`/api/orders`, {params: {page}})
+    const orders = data.data
+    return orders.map((v) => {
+        v.learning_type = v.learning_type?.split(' ').map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')
+        return v
+    })
+}
+
+export async function sendRespond(id, message){
+    return await $http.post('/api/reply', {
+        order: id,
+        comment: message
+    })
+}
