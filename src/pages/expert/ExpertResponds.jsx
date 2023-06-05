@@ -1,11 +1,13 @@
 import '../../styles/Expert/ExpertResponds.scss'
 import {useEffect, useState} from "react";
+import {getLearningType, getRespondsByToken} from "../../helpers/OrderHelper";
 
 export default function ExpertResponds(){
     const [respondsType, setRespondsType] = useState('opened')
     const [responds, setResponds] = useState([])
     useEffect(() => {
-
+        getRespondsByToken()
+            .then((value) => setResponds(value))
     }, [])
 
     return (
@@ -26,12 +28,12 @@ export default function ExpertResponds(){
                     >Отклоненные</li>
                 </ul>
                 <ul className='responds__list'>
-                    <li className='responds__item'>
-                        <h2 className='responds__title'>Интегралы</h2>
-                        <p className='responds__description'>Определенные и неопределенные интегралы, подготовка к контрольной работе. Учусь на втором курсе у Поторочиной.</p>
-                        <p className='responds__learning-type'>Онлайн</p>
-                        <p className='responds__price'>550 &#8381;</p>
-                    </li>
+                    {responds.map((v,i) => <li className='responds__item' key={i}>
+                        <h2 className='responds__title'>{v.order.name}</h2>
+                        <p className='responds__description'>{v.order.description}</p>
+                        <p className='responds__learning-type'>{getLearningType(v.order.learning_type)}</p>
+                        <p className='responds__price'>{v.order.price} &#8381;</p>
+                    </li>)}
                 </ul>
             </div>
 

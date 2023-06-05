@@ -50,3 +50,12 @@ export async function  getRespondsByOrderId(id){
     const data = await $http.get('/api/replies', {params: {order: id}})
     return data.data
 }
+
+export async function getRespondsByToken(){
+    const data = await $http.get('api/user/replies')
+    return data.data
+}
+
+export function getLearningType(learningType){
+    return learningType = learningType.split(' ').map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')
+}

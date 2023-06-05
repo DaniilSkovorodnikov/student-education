@@ -32,4 +32,48 @@
       color: white;
     }
   }
+
+  &__list{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__item{
+    width: 100%;
+    padding: 25px;
+    border: 1px solid #B1B1B1;
+    border-radius: 25px;
+  }
+
+  &__title{
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 28px;
+    color: #FF3D00;
+    margin-bottom: 15px;
+  }
+
+  &__description, &__learning-type, &__price{
+    font-size: 18px;
+    line-height: 22px;
+    color: #1E1E1E;
+  }
+
+  &__learning-type{
+    margin-top: 10px;
+    margin-bottom:  25px;
+    display: flex;
+    align-items: center;
+
+    &:before{
+      content: url("../../img/place-icon.svg");
+      margin-right: 5px;
+    }
+  }
+
+  &__price{
+    font-weight: 500;
+  }
 }
