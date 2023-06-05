@@ -45,3 +45,8 @@ export async function sendRespond(id, message){
         comment: message
     })
 }
+
+export async function  getRespondsByOrderId(id){
+    const data = await $http.get('/api/replies', {params: {order: id}})
+    return data.data
+}

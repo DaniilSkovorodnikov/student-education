@@ -12,7 +12,7 @@ export default function ProfilePage(){
     return (
         <div className="profile">
             <div className="profile__main">
-                <img src={avatar} alt="" className="profile__avatar"/>
+                <img src={user.image || avatar} alt="" className="profile__avatar"/>
                 <div className="profile__personal">
                     <h2 className="profile__name">{user.name}</h2>
                     <p className="profile__faculty">{user.learning_trajectory}</p>

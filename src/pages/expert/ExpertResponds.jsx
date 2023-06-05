@@ -1,8 +1,12 @@
 import '../../styles/Expert/ExpertResponds.scss'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function ExpertResponds(){
     const [respondsType, setRespondsType] = useState('opened')
+    const [responds, setResponds] = useState([])
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div className='responds'>
@@ -20,6 +24,14 @@ export default function ExpertResponds(){
                         className={['responds__type', respondsType === 'rejected' && 'active'].join(' ')}
                         onClick={() => setRespondsType('rejected')}
                     >Отклоненные</li>
+                </ul>
+                <ul className='responds__list'>
+                    <li className='responds__item'>
+                        <h2 className='responds__title'>Интегралы</h2>
+                        <p className='responds__description'>Определенные и неопределенные интегралы, подготовка к контрольной работе. Учусь на втором курсе у Поторочиной.</p>
+                        <p className='responds__learning-type'>Онлайн</p>
+                        <p className='responds__price'>550 &#8381;</p>
+                    </li>
                 </ul>
             </div>
 

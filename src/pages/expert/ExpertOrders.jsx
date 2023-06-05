@@ -2,7 +2,7 @@ import '../../styles/Expert/ExpertOrders.scss'
 import '../../styles/Filters.scss'
 import {useCallback, useEffect, useState} from "react";
 import {getOrdersByPage, sendRespond} from "../../helpers/OrderHelper";
-import {debounce} from "../../helpers/LazyLoader";
+import {debounce} from "../../components/LazyLoader";
 import Modal from "../../components/Modal";
 import MultipleFilter from "../../components/MultipleFilter";
 import {getCompetencies, getTrajectories} from "../../helpers/UserHelper";
