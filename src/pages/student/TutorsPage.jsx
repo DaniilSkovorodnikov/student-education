@@ -4,7 +4,7 @@ import avatar from '../../img/avatar.jpg'
 import {useEffect, useState} from "react";
 import $http from "../../http/http";
 import {useNavigate} from "react-router-dom";
-import {getCompetencies, getTrajectories} from "../../helpers/UserHelper";
+import {getCompetencies, getTrajectories, RuEducationStage} from "../../helpers/UserHelper";
 import MultipleFilter from "../../components/MultipleFilter";
 
 export default function TutorsPage(){
@@ -81,7 +81,7 @@ export default function TutorsPage(){
                             <img src={v.image || avatar} alt="" className="tutors__icon"/>
                             <div className="tutors__personal">
                                 <h3 className="tutors__name">{v.name}</h3>
-                                <p className="tutors__specialty">{v.learning_trajectory}, {v.course_number} курс</p>
+                                <p className="tutors__specialty">{v.learning_trajectory}, {v.course_number} курс, {RuEducationStage[v.education_stage]}</p>
                             </div>
                             <button className="tutors__message-btn"></button>
                         </div>

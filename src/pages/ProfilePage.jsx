@@ -17,7 +17,7 @@ export default function ProfilePage(){
                     <h2 className="profile__name">{user.name}</h2>
                     <p className="profile__faculty">{user.learning_trajectory}</p>
                 </div>
-                <button className='profile__edit-btn' onClick={() => navigate('/student/profile/edit')}/>
+                {/*<button className='profile__edit-btn' onClick={() => navigate('/student/profile/edit')}/>*/}
             </div>
             <div className="profile__personal">
                 <div className="profile__field">

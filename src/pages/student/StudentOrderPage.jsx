@@ -8,16 +8,19 @@ export default function StudentOrderPage(){
     const [order, setOrder] = useState({})
     const [responds, setResponds] = useState([])
     const [isChangedStatus, setIsChangedStatus] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const {id} = useParams()
     useEffect(() => {
         getOrderById(id)
             .then((value) => setOrder(value))
+            .finally(() => setIsLoading(false))
         getRespondsByOrderId(id)
             .then(value => setResponds(value))
     }, [isChangedStatus])
 
     return (
         <div className='order'>
+            {isLoading ? <div className="loader"/> :
             <div className="order__main">
                 <div className="order__header">
                     <h2 className="order__title">{order.name}</h2>
@@ -26,11 +29,11 @@ export default function StudentOrderPage(){
                 <p className="order__description">{order.description}</p>
                 <p className='order__learning-type'>{order.learning_type}</p>
                 <button className='order__delete'>Закрыть задание</button>
-            </div>
+            </div>}
             <div className="order__experts experts">
                 <h2 className='experts__title'>Отклики репетиторов</h2>
                 <ul className='experts__list'>
-                    {responds.map((v, i) => <li className="experts__item" key={v.id}>
+                    {responds.map((v) => <li className="experts__item" key={v.id}>
                         <div className="experts__header">
                             <img src={v.expert.image || avatar} alt="" className='experts__avatar'/>
                             <div className="experts__personal">

@@ -2,7 +2,8 @@ import '../../styles/Student/StudentCreateOrder.scss'
 import {useForm} from "react-hook-form";
 import {createOrder} from "../../helpers/OrderHelper";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getCompetencies} from "../../helpers/UserHelper";
 
 export default function StudentCreateOrder(){
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
@@ -10,6 +11,15 @@ export default function StudentCreateOrder(){
     })
     const navigate = useNavigate()
     const [error, setError] = useState(false)
+    const [availibleThemes, setAvailibleThemes] = useState([])
+
+    useEffect(() => {
+        getCompetencies()
+            .then((value) => {
+                setAvailibleThemes(value)
+                console.log(value)
+            })
+    }, [])
 
     function onSubmitForm(data) {
         const order = {
@@ -24,8 +34,11 @@ export default function StudentCreateOrder(){
     return (
         <form className='create-order' onSubmit={handleSubmit(onSubmitForm)}>
             <div className="create-order__control">
-                <input type='text' placeholder='Название заказа...' {...register('name', {required: true})}/>
-                {errors.title && <p className='create-order__alert'>Введите название заказа</p>}
+                <select defaultValue='Тема заказа...' className='create-order__select' {...register('name', {required: true, validate: (value) => value !== 'Тема заказа...'})}>
+                    <option disabled>Тема заказа...</option>
+                    {availibleThemes.map((v, i) => <option value={v} key={i}>{v}</option>)}
+                </select>
+                {errors.name && <p className='create-order__alert'>Введите название заказа</p>}
             </div>
             <div className="create-order__control">
                 <textarea placeholder='Описание заказа...' {...register('description')}/>

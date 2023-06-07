@@ -53,7 +53,7 @@ export default function ExpertOrders({stageSetter}){
                         document.removeEventListener('scroll', debouncedListener)
                     }
                 })
-                .catch((err) => setError(true))
+                .catch(() => setError(true))
                 .finally(() => setIsLoading(false))
 
     }, [page])
@@ -97,10 +97,12 @@ export default function ExpertOrders({stageSetter}){
                 <ul className='orders__list'>
                     {orders
                         .filter((value) => {
-                            const subjectsFilter = filters.subjects.length === 0 || filters.subjects.some((v) => value.name === v)
-                            const courseFilter = filters.courses.length === 0 || filters.courses.includes(value.course_number)
-                            const learningTypeFilter = !filters.learning_type || filters.learning_type === value.learning_type
-                            return subjectsFilter && courseFilter && learningTypeFilter
+                            console.log(value)
+                            const subjectsFilter = filters.subjects.length === 0 || filters.subjects.some((v) => value.name === v);
+                            const trajectoryFilter = filters.trajectories.length === 0 || filters.trajectories.some((v) => value.student.learning_trajectory === v)
+                            const courseFilter = filters.courses.length === 0 || filters.courses.includes(value.student.course);
+                            const learningTypeFilter = !filters.learning_type || filters.learning_type === value.learning_type;
+                            return subjectsFilter && courseFilter && learningTypeFilter && trajectoryFilter
                         })
                         .map((v, i) =>
                         <li className='orders__item' key={i}>
