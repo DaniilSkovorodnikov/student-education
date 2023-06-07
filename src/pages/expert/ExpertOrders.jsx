@@ -8,8 +8,9 @@ import MultipleFilter from "../../components/MultipleFilter";
 import {getCompetencies, getTrajectories} from "../../helpers/UserHelper";
 
 
-export default function ExpertOrders(){
+export default function ExpertOrders({stageSetter}){
     const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(false)
     const [page, setPage] = useState(1)
     const [orders, setOrders] = useState([])
 
@@ -52,6 +53,7 @@ export default function ExpertOrders(){
                         document.removeEventListener('scroll', debouncedListener)
                     }
                 })
+                .catch((err) => setError(true))
                 .finally(() => setIsLoading(false))
 
     }, [page])
@@ -91,6 +93,7 @@ export default function ExpertOrders(){
                         sex: ''
                     })}>Сбросить фильтры</button>
                 </div>
+                {(error || orders.length === 0) && !isLoading && <p>К сожалению, сейчас нет доступных заказов!</p>}
                 <ul className='orders__list'>
                     {orders
                         .filter((value) => {
@@ -123,9 +126,12 @@ export default function ExpertOrders(){
                         <textarea className='respond__field' value={respondMessage} onChange={(e) => setRespondMessage(e.target.value)}/>
                         <button className='respond__send' onClick={() => {
                             sendRespond(currentOrder, respondMessage)
-                            setCurrentOrder(-1)
-                            setRespondMessage('')
-                            setVisible(false)
+                                .then(() => {
+                                    setCurrentOrder(-1)
+                                    setRespondMessage('')
+                                    setVisible(false)
+                                    stageSetter('responds')
+                                })
                         }}>Отправить отклик</button>
                     </div>
                 </Modal>

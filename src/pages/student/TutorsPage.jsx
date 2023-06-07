@@ -72,7 +72,8 @@ export default function TutorsPage(){
                         const subjectsFilter = filters.subjects.length === 0 || filters.subjects.some((v) => value.competencies.includes(v))
                         const trajectoryFilter = filters.trajectories.length === 0 || filters.trajectories.includes(value.learning_trajectory)
                         const courseFilter = filters.courses.length === 0 || filters.courses.includes(value.course_number)
-                        return subjectsFilter && trajectoryFilter && courseFilter
+                        const sexFilter = !filters.sex || filters.sex === value.sex
+                        return subjectsFilter && trajectoryFilter && courseFilter && sexFilter
                     })
                     .map((v,i) =>
                     <li className='tutors__item' onClick={() => navigate(`/tutor/${v.id}`)} key={i}>

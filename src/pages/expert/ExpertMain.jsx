@@ -11,7 +11,7 @@ export default function ExpertMain(){
                 <p className={['main__changer', state === 'orders' && 'active'].join(' ')} onClick={() => setState('orders')}>Заказы</p>
                 <p className={['main__changer', state === 'responds' && 'active'].join(' ')} onClick={() => setState('responds')}>Мои отклики</p>
             </div>
-            {state === 'orders' ? <ExpertOrders/> : <ExpertResponds/>}
+            {state === 'orders' ? <ExpertOrders stageSetter={setState}/> : <ExpertResponds/>}
         </div>
     )
 }
