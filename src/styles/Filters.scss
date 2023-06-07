@@ -31,4 +31,14 @@
       background-color: #1E1E1E;
     }
   }
+
+  &__reset{
+    width: 70%;
+    padding: 7px;
+    background-color: #ff3d00;
+    color: white;
+    margin: 0 auto;
+    border: none;
+    border-radius: 15px;
+  }
 }

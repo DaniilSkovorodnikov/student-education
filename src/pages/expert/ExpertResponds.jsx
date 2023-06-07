@@ -5,9 +5,11 @@ import {getLearningType, getRespondsByToken} from "../../helpers/OrderHelper";
 export default function ExpertResponds(){
     const [respondsType, setRespondsType] = useState('opened')
     const [responds, setResponds] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         getRespondsByToken()
             .then((value) => setResponds(value))
+            .finally(() => setIsLoading(false))
     }, [])
 
     return (
@@ -27,8 +29,9 @@ export default function ExpertResponds(){
                         onClick={() => setRespondsType('rejected')}
                     >Отклоненные</li>
                 </ul>
+                {isLoading && <div className='loader'></div>}
                 <ul className='responds__list'>
-                    {responds.map((v,i) => <li className='responds__item' key={i}>
+                    {responds.filter((value) => value.status === respondsType).map((v,i) => <li className='responds__item' key={i}>
                         <h2 className='responds__title'>{v.order.name}</h2>
                         <p className='responds__description'>{v.order.description}</p>
                         <p className='responds__learning-type'>{getLearningType(v.order.learning_type)}</p>

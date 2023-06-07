@@ -23,7 +23,7 @@ export default function StudentOrders(){
                 <div className="orders__header">
                     <button className='orders__create' onClick={() => navigate('/student/order/create')}>Создать заказ</button>
                 </div>
-                {loading ? <div>Загрузка...</div> : <ul className='orders__list'>
+                {loading ? <div className='loader'></div> : <ul className='orders__list'>
                     {orders.map((v, i) =>
                             <li className='orders__item' key={i} onClick={() => navigate(`/student/order/${v.id}`)}>
                                 <h2 className='orders__subtitle'>{v.name}</h2>

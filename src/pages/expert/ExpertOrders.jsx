@@ -62,7 +62,7 @@ export default function ExpertOrders(){
                 <div className="orders__filters filters">
                     <MultipleFilter options={subjects} onChangeSetter={setFilters} value={filters.subjects} name={'subjects'} placeholder='По всем темам'/>
                     <MultipleFilter options={trajectories} onChangeSetter={setFilters} value={filters.trajectories} name={'trajectories'} placeholder='Направление подготовки репетитора'/>
-                    <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} value={filters.courses} name={'courses'} placeholder='Курс репетитора'/>
+                    <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} value={filters.courses} name={'courses'} placeholder='Курс студента'/>
                     <div className="filters__field">
                         <h3 className='filters__subtitle'>Формат взаимодействия</h3>
                         <label className='filters__label'>
@@ -83,7 +83,7 @@ export default function ExpertOrders(){
                             Онлайн
                         </label>
                     </div>
-                    <button onClick={() => setFilters({
+                    <button className='filters__reset' onClick={() => setFilters({
                         subjects: [],
                         trajectories: [],
                         courses: [],
@@ -103,9 +103,9 @@ export default function ExpertOrders(){
                         <li className='orders__item' key={i}>
                             <div className="orders__header">
                                 <h3 className="orders__subtitle">{v.name}</h3>
-                                <p className="orders__description">{v.description}</p>
-
+                                <p className='orders__learning-type'>{v.learning_type}</p>
                             </div>
+                            <p className="orders__description">{v.description}</p>
                             <div className="orders__footer">
                                 <p className='orders__price'>{v.price} &#8381;</p>
                                 <button className="orders__respond" onClick={() => {
@@ -116,14 +116,13 @@ export default function ExpertOrders(){
                         </li>
                     )}
                 </ul>
-                {isLoading && <div className='orders__loader'></div>}
+                {isLoading && <div className='loader'></div>}
                <Modal visible={visible} setVisible={setVisible}>
                     <div className="respond" onClick={(event) => event.stopPropagation()}>
                         <h2 className="respond__title">Оставьте свои контакты</h2>
                         <textarea className='respond__field' value={respondMessage} onChange={(e) => setRespondMessage(e.target.value)}/>
                         <button className='respond__send' onClick={() => {
                             sendRespond(currentOrder, respondMessage)
-                                .then((value) => console.log(value.data))
                             setCurrentOrder(-1)
                             setRespondMessage('')
                             setVisible(false)

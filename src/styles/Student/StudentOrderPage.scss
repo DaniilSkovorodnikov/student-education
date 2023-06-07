@@ -152,4 +152,16 @@
     line-height: 25px;
     margin-left: 10px;
   }
+
+  &__accepted{
+    text-align: center;
+    font-size: 26px;
+    color: #00e600;
+  }
+
+  &__rejected{
+    text-align: center;
+    font-size: 26px;
+    color: crimson;
+  }
 }

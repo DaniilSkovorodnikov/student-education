@@ -70,8 +70,12 @@
       border: none;
     }
 
+    &:not(.selected):hover{
+      color: crimson;
+    }
+
     &.selected{
-      background-color: lightyellow;
+      color: crimson;
     }
   }
 }

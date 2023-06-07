@@ -20,6 +20,11 @@
     cursor: pointer;
     border-radius: 25px;
     margin-bottom: 50px;
+    transition: 100ms ease;
+
+    &:hover{
+      background-color: rgba(0,0,0,0.05);
+    }
   }
 
   &__header{

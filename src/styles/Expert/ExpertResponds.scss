@@ -31,6 +31,11 @@
       background-color: #ff3d00;
       color: white;
     }
+
+    &:not(.active):hover{
+      background-color: rgba(0,0,0,0.1);
+      transition: 0.2s ease;
+    }
   }
 
   &__list{

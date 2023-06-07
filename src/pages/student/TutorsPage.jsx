@@ -15,9 +15,9 @@ export default function TutorsPage(){
         subjects: [],
         trajectories: [],
         courses: [],
-        learning_type: '',
         sex: ''
     })
+    const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -25,11 +25,9 @@ export default function TutorsPage(){
             .then((value) => setSubjects(value))
         getTrajectories()
             .then((value) => setTrajectories(value))
-    }, [])
-
-    useEffect(() => {
         $http.get('/api/experts')
             .then((value) => setTutors(value.data))
+            .finally(() => setIsLoading(false))
     }, [])
 
     return (
@@ -38,28 +36,6 @@ export default function TutorsPage(){
                 <MultipleFilter options={subjects} onChangeSetter={setFilters} value={filters.subjects} name={'subjects'} placeholder='По всем темам'/>
                 <MultipleFilter options={trajectories} onChangeSetter={setFilters} value={filters.trajectories} name={'trajectories'} placeholder='Направление подготовки репетитора'/>
                 <MultipleFilter options={[1,2,3,4,5,6]} onChangeSetter={setFilters} value={filters.courses} name={'courses'} placeholder='Курс репетитора'/>
-                <div className="filters__field">
-                    <h3 className='filters__subtitle'>Формат взаимодействия</h3>
-                    <label className='filters__label'>
-                        <input type='radio'
-                               name='learning-type'
-                               value='full-time'
-                               className='filters__checkbox'
-                               onChange={(e) => setFilters({...filters, learning_type: e.target.value})}
-                               checked={filters.learning_type && filters.learning_type === 'full-time'}
-                        /> Очно
-                    </label>
-                    <label className='filters__label'>
-                        <input type='radio'
-                               name='learning-type'
-                               value='online'
-                               className='filters__checkbox'
-                               onChange={(e) => setFilters({...filters, learning_type: e.target.value})}
-                               checked={filters.learning_type && filters.learning_type === 'online'}
-                        />
-                         Онлайн
-                    </label>
-                </div>
                 <div className="filters__field">
                     <h3 className='filters__subtitle'>Пол репетитора</h3>
                     <label className='filters__label'>
@@ -81,7 +57,7 @@ export default function TutorsPage(){
                         /> Женский
                     </label>
                 </div>
-                <button onClick={() => setFilters({
+                <button className='filters__reset' onClick={() => setFilters({
                     subjects: [],
                     trajectories: [],
                     courses: [],
@@ -89,6 +65,7 @@ export default function TutorsPage(){
                     sex: ''
                 })}>Сбросить фильтры</button>
             </div>
+            {isLoading && <div className='loader'></div>}
             <ul className='tutors__list'>
                 {tutors
                     .filter((value) => {
@@ -103,7 +80,7 @@ export default function TutorsPage(){
                             <img src={v.image || avatar} alt="" className="tutors__icon"/>
                             <div className="tutors__personal">
                                 <h3 className="tutors__name">{v.name}</h3>
-                                <p className="tutors__specialty">{v.learning_trajectory}</p>
+                                <p className="tutors__specialty">{v.learning_trajectory}, {v.course_number} курс</p>
                             </div>
                             <button className="tutors__message-btn"></button>
                         </div>
@@ -118,7 +95,6 @@ export default function TutorsPage(){
                         </div>
                     </li>
                 )}
-
             </ul>
         </div>
     )

@@ -56,6 +56,10 @@ export async function getRespondsByToken(){
     return data.data
 }
 
+export async function setStatus(id, status){
+    $http.patch(`api/reply/${id}`, {status})
+}
+
 export function getLearningType(learningType){
     return learningType = learningType.split(' ').map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')
 }

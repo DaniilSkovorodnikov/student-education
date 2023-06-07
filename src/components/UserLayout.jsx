@@ -16,7 +16,9 @@ export default function UserLayout(){
                         <button className="header__btn message-btn"></button>
                     </li>
                     <li className="header__link">
-                        <button className='header__btn profile-btn' onClick={() => navigate(`/profile/${user.id}`)}></button>
+                        <button className='header__btn profile-btn' onClick={() => navigate(`/profile/${user.id}`)}>
+                            <img className='header__avatar' src={user.image}/>
+                        </button>
                     </li>
                 </ul>
             </nav>

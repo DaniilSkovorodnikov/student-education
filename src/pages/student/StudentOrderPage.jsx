@@ -2,18 +2,19 @@ import '../../styles/Student/StudentOrderPage.scss'
 import avatar from '../../img/avatar.jpg'
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {getOrderById, getRespondsByOrderId} from "../../helpers/OrderHelper";
+import {getOrderById, getRespondsByOrderId, setStatus} from "../../helpers/OrderHelper";
 
 export default function StudentOrderPage(){
     const [order, setOrder] = useState({})
     const [responds, setResponds] = useState([])
+    const [isChangedStatus, setIsChangedStatus] = useState(false)
     const {id} = useParams()
     useEffect(() => {
         getOrderById(id)
             .then((value) => setOrder(value))
         getRespondsByOrderId(id)
             .then(value => setResponds(value))
-    }, [])
+    }, [isChangedStatus])
 
     return (
         <div className='order'>
@@ -39,8 +40,12 @@ export default function StudentOrderPage(){
                             <button className='experts__write'/>
                         </div>
                         <p className='experts__description'>{v.comment}</p>
-                        <button className="experts__choose">Принять</button>
-                        <button className="experts__choose">Отклонить</button>
+                        {v.status === 'opened' && <>
+                            <button className="experts__choose" onClick={() => setStatus(v.id, 'accepted').then(() => setIsChangedStatus(!isChangedStatus))}>Принять</button>
+                            <button className="experts__choose" onClick={() => setStatus(v.id, 'rejected').then(() => setIsChangedStatus(!isChangedStatus))}>Отклонить</button>
+                        </>}
+                        {v.status === 'accepted' && <p className='experts__accepted'>Принят!</p>}
+                        {v.status === 'rejected' && <p className='experts__rejected'>Отклонён!</p>}
                     </li>)}
                 </ul>
             </div>
