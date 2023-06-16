@@ -1,5 +1,5 @@
 import '../styles/Layout.scss'
-import { Outlet, useNavigate} from "react-router-dom";
+import { Outlet, useNavigate, Link} from "react-router-dom";
 import {useContext} from "react";
 import {AuthContext} from "../context/AuthContext";
 
@@ -10,7 +10,7 @@ export default function UserLayout(){
     return (<div className='layout'>
         <header className="header">
             <nav className="header__navigation">
-                <button className='header__logo' onClick={() => navigate(`/`)}/>
+                <Link className='header__logo' to='/'>peers</Link>
                 <ul className="header__links">
                     <li className="header__link">
                         <button className="header__btn message-btn"></button>
