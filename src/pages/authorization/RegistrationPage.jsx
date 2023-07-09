@@ -5,7 +5,7 @@ import avatar_field from '../../img/avatar.jpg'
 import {useForm} from "react-hook-form";
 import {useContext, useEffect, useMemo, useState} from "react";
 import MultiSelect from "../../components/MultiSelect";
-import {getEducationStage, getCompetencies, getTrajectories} from "../../helpers/UserHelper";
+import {getEducationStage, getCompetencies, getTrajectories, courses} from "../../helpers/UserHelper";
 import {AuthContext} from "../../context/AuthContext";
 
 export default function RegistrationPage(){
@@ -45,16 +45,6 @@ export default function RegistrationPage(){
         getTrajectories()
             .then((value)=> setTrajectories(value))
     }, []);
-
-    const courses = useMemo(() => [
-        'Бакалавриат, специалитет - 1 курс',
-        'Бакалавриат, специалитет - 2 курс',
-        'Бакалавриат, специалитет - 3 курс',
-        'Бакалавриат, специалитет - 4 курс',
-        'Специалитет - 5 курс',
-        'Магистратура - 1 курс',
-        'Магистратура - 2 курс',
-    ], []);
 
     return (
         <div className='registration'>
@@ -144,7 +134,6 @@ export default function RegistrationPage(){
                                }}
                         />
                     </label>
-
                     <div className="registration__control">
                         <input type="text"
                                className="login__input"
@@ -213,7 +202,6 @@ export default function RegistrationPage(){
                         <h3 className="registration__subtitle">Укажите свой курс обучения</h3>
                         <select className="registration__input" {...mainForm.register('course_number', {required: true})}>
                             {courses.map((v,i) => <option value={i + 1} key={i}>{v}</option>)}
-                            <option value='1'>1</option>
                         </select>
                         <div className="registration__validation">
                             {mainForm.formState.errors.course_number && <p className="registration__alert">Введите номер курса</p>}

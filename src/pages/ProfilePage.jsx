@@ -1,12 +1,13 @@
 import '../styles/Profile.scss'
 import {useContext} from "react";
 import {AuthContext} from "../context/AuthContext";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import avatar from "../img/avatar.jpg";
 import {getGender} from "../helpers/UserHelper";
 
 export default function ProfilePage(){
     const {user, role, logout} = useContext(AuthContext)
+    const {id} = useParams()
     const navigate = useNavigate()
 
     return (
@@ -17,7 +18,7 @@ export default function ProfilePage(){
                     <h2 className="profile__name">{user.name}</h2>
                     <p className="profile__faculty">{user.learning_trajectory}</p>
                 </div>
-                {/*<button className='profile__edit-btn' onClick={() => navigate('/student/profile/edit')}/>*/}
+                <button className='profile__edit-btn' onClick={() => navigate(`edit`)}/>
             </div>
             <div className="profile__personal">
                 <div className="profile__field">

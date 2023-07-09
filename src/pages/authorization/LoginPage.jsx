@@ -49,7 +49,11 @@ export default function LoginPage(){
                     <div className="login__validation">
                         {error && <p className='login__alert'>Проверьте правильность введенных данных</p>}
                     </div>
-                    <button type='submit' className="login__submit" disabled={!isValid || loading}>Войти</button>
+                    <button type='submit'
+                            className="login__submit"
+                            disabled={!isValid || loading}
+                            style={{margin: '0 auto 15px', width: '70%'}}
+                    >Войти</button>
                     <p className="login__text">или <Link to='/registration' className="login__link">зарегистрироваться</Link></p>
                 </div>
             </form>

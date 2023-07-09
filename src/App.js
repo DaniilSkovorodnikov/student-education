@@ -11,7 +11,7 @@ import TutorsPage from "./pages/student/TutorsPage";
 import StudentTutorPage from "./pages/student/StudentTutorPage";
 import StudentOrders from "./pages/student/StudentOrders";
 import StudentCreateOrder from "./pages/student/StudentCreateOrder";
-import StudentEditProfilePage from "./pages/student/StudentEditProfilePage";
+import EditProfilePage from "./pages/EditProfilePage";
 import StudentOrderPage from "./pages/student/StudentOrderPage";
 import ProfilePage from "./pages/ProfilePage";
 import ExpertOrders from "./pages/expert/ExpertOrders";
@@ -29,7 +29,6 @@ function App() {
                         <Route element={<UserLayout/>}>
                             <Route element={<RoleGuard correctRole='student'/>}>
                                     <Route path='/student' element={<StudentMain/>}/>
-                                    <Route path='/student/profile/edit' element={<StudentEditProfilePage/>}/>
                                     <Route path='/tutors' element={<TutorsPage/>}/>
                                     <Route path='/tutor/:id' element={<StudentTutorPage/>}/>
                                     <Route path='/student/orders' element={<StudentOrders/>}/>
@@ -38,10 +37,10 @@ function App() {
                             </Route>
                             <Route element={<RoleGuard correctRole='expert'/> }>
                                 <Route path='/expert' element={<ExpertMain/>}/>
-                                <Route path='/expert/profile/edit' element={<div>Expert works</div>}/>
                                 <Route path='/expert/order/:id' element={<ExpertOrders/>}/>
                             </Route>
-                            <Route path={'/profile/:id'} element={<ProfilePage/>}/>
+                            <Route path='/profile/:id' element={<ProfilePage/>}/>
+                            <Route path='/profile/:id/edit' element={<EditProfilePage/>}/>
                         </Route>
                     </Route>
                     <Route path='/login' element={<LoginPage/>}/>

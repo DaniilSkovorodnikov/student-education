@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = 'https://studenteducation-production.up.railway.app';
+export const API_URL = 'http://26.87.4.182:8000';
 
 const $http = axios.create({
     baseURL: API_URL
