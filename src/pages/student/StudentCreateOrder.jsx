@@ -17,7 +17,6 @@ export default function StudentCreateOrder(){
         getCompetencies()
             .then((value) => {
                 setAvailibleThemes(value)
-                console.log(value)
             })
     }, [])
 

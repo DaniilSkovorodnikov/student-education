@@ -4,6 +4,10 @@ export function createOrder(order){
     return $http.post('/api/order', order)
 }
 
+export function editOrder(order){
+    return $http.patch(`/api/order/${order.id}`, order)
+}
+
 export async function getOrdersByToken(){
     try {
         const data = await $http.get('/api/user/orders')
