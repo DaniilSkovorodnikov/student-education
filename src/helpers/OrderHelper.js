@@ -8,6 +8,10 @@ export function editOrder(order){
     return $http.patch(`/api/order/${order.id}`, order)
 }
 
+export function deleteOrder(id){
+    return $http.delete(`/api/order/${id}`)
+}
+
 export async function getOrdersByToken(){
     try {
         const data = await $http.get('/api/user/orders')
@@ -26,7 +30,6 @@ export async function getOrderById(id){
     try {
         const data = await $http.get(`/api/order/${id}`)
         const order = data.data
-        order.learning_type = order.learning_type.split(' ').map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')
         return order
     }
     catch (e){

@@ -2,8 +2,8 @@ import '../../styles/Student/StudentOrderPage.scss'
 import '../../styles/Student/StudentCreateOrder.scss'
 import avatar from '../../img/avatar.jpg'
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {editOrder, getOrderById, getRespondsByOrderId, setStatus} from "../../helpers/OrderHelper";
+import {useNavigate, useParams} from "react-router-dom";
+import {deleteOrder, editOrder, getOrderById, getRespondsByOrderId, setStatus} from "../../helpers/OrderHelper";
 import Modal from "../../components/Modal";
 import {getCompetencies} from "../../helpers/UserHelper";
 
@@ -15,7 +15,8 @@ export default function StudentOrderPage(){
     const [editMode, setEditMode] = useState(false)
     const [updatedOrder, setUpdatedOrder] = useState({})
     const [availableThemes, setAvailableThemes] = useState([])
-    const {id} = useParams()
+    const {id} = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
         getOrderById(id)
             .then((value) => setOrder(value))
@@ -44,7 +45,6 @@ export default function StudentOrderPage(){
     const handleEdit = (e) => {
         e.preventDefault()
         const updated = {...updatedOrder, learning_type: updatedOrder.learning_type.map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')}
-        console.log(updated)
         setOrder(updated)
         editOrder(updated)
             .then(() => setEditMode(false))
@@ -64,7 +64,9 @@ export default function StudentOrderPage(){
                     <p className='order__learning-type'>{order.learning_type}</p>
                     <p className='order__price'>{order.price} &#8381;</p>
                 </div>
-                <button className='order__delete'>Закрыть задание</button>
+                <button className='order__delete' onClick={() => {
+                    deleteOrder(id).then(() => navigate('/student/orders'))
+                }}>Закрыть задание</button>
             </div>}
             <div className="order__experts experts">
                 <h2 className='experts__title'>Отклики репетиторов</h2>
@@ -126,7 +128,6 @@ export default function StudentOrderPage(){
                                    checked={updatedOrder.learning_type?.includes('online')}
                                    name='learning_type'
                                    onChange={(e) => {
-                                       console.log('changed')
                                        if (updatedOrder.learning_type.includes(e.target.value)){
                                            setUpdatedOrder({...updatedOrder, learning_type: updatedOrder.learning_type.filter((v) => v !== e.target.value)})
                                        }
