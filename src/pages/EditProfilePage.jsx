@@ -1,11 +1,12 @@
 import '../styles/EditProfile.scss'
 import {useForm} from "react-hook-form";
-import {courses, getCourse, getEducationStage, getTrajectories} from "../helpers/UserHelper";
+import {courses, getCompetencies, getCourse, getEducationStage, getTrajectories} from "../helpers/UserHelper";
 import {useContext, useEffect, useMemo, useState} from "react";
 import avatar_field from "../img/avatar.jpg";
 import {AuthContext} from "../context/AuthContext";
 import $http from "../http/http";
 import {useNavigate, useParams} from "react-router-dom";
+import MultiSelect from "../components/MultiSelect";
 
 
 
@@ -19,15 +20,22 @@ export default function EditProfilePage(){
             sex: user.sex,
             phone_number: user.phone_number,
             email: user.email,
-            learning_trajectory: user.learning_trajectory,
             course: getCourse(user.course_number, user.education_stage),
         }
     })
     const [trajectories, setTrajectories] = useState([])
-    const [img, setImg] = useState(null);
+    const [competencies, setCompetencies] = useState([])
+    const [img, setImg] = useState(user.image);
+    const [learningTrajectory, setLearningTrajectory] = useState(user.learning_trajectory)
+    const [learningTrajectoryChanged, setLearningTrajectoryChanged] = useState(false)
+    const [imgChanged, setImgChanged] = useState(false)
+    const [userCompetencies, setUserCompetencies] = useState(user.competencies)
     const fileReader = useMemo(() => {
         const reader = new FileReader()
-        reader.onloadend = (ev) => setImg(reader.result)
+        reader.onloadend = (ev) => {
+            setImg(reader.result)
+            setImgChanged(true)
+        }
         return reader
     }, [])
     const navigate = useNavigate()
@@ -36,6 +44,8 @@ export default function EditProfilePage(){
     useEffect(() => {
         getTrajectories()
             .then((value) => setTrajectories(value))
+        getCompetencies()
+            .then((v) => setCompetencies(v))
     }, [])
 
     function onSubmit(data){
@@ -49,9 +59,14 @@ export default function EditProfilePage(){
                 user[value] = updatedData[value] = data[value]
             }
         })
-        if (img){
+        if (imgChanged){
             user['image'] = updatedData['image'] = img
         }
+        if (userCompetencies){
+            user.competencies  = updatedData['competencies'] = userCompetencies
+        }
+        user.learning_trajectory = updatedData['learning_trajectory'] = learningTrajectory
+        console.log(updatedData)
         $http.patch('/api/user', updatedData)
         navigate(`/profile/${id}`)
     }
@@ -98,7 +113,10 @@ export default function EditProfilePage(){
                 })}/>
             </div>
             <div className="profile-edit__control">
-                <select className='profile-edit__input' {...register('learning_trajectory', {required: true})}>
+                <select className='profile-edit__input' value={learningTrajectory} onChange={(e) => {
+                    setLearningTrajectory(e.target.value)
+                    setLearningTrajectoryChanged(trajectories)
+                }}>
                     {trajectories.map((v, i) => <option value={v} key={i}>{v}</option>)}
                 </select>
             </div>
@@ -107,7 +125,9 @@ export default function EditProfilePage(){
                     {courses.map((v, i) => <option value={i + 1} key={i}>{v}</option>)}
                 </select>
             </div>
-            {(isDirty || img) && <button type='submit' className='profile-edit__submit' disabled={!isValid && !img}>Сохранить изменения</button>}
+            {user.role === 'expert' && <MultiSelect defaultValues={user.competencies} options={competencies} setValue={setUserCompetencies}/>}
+            {(isDirty || imgChanged || learningTrajectoryChanged || (userCompetencies && userCompetencies.length !== user.competencies.length)) &&
+                <button type='submit' className='profile-edit__submit' disabled={Object.values(errors).length > 0 || !img}>Сохранить изменения</button>}
         </form>
     )
 }

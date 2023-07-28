@@ -28,7 +28,7 @@
   }
 
   &__avatar{
-    width: 130px;
+    min-width: 130px;
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
@@ -36,7 +36,7 @@
 
   &__edit-btn{
     background-image: url("../img/edit-profile-btn.svg");
-    width: 21px;
+    min-width: 21px;
     height: 25px;
     background-position: 50% 50%;
     border: none;

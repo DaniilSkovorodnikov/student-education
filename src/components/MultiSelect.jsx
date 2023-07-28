@@ -1,8 +1,8 @@
 import '../styles/Multiselect.scss'
 import {useState} from "react";
 
-export default function MultiSelect({options, setValue}){
-    const [selected, setSelected] = useState([])
+export default function MultiSelect({options, setValue, defaultValues}){
+    const [selected, setSelected] = useState(defaultValues ? [...defaultValues] : [])
     const [currentChecked, setCurrentChecked] = useState(-1)
 
     return (
