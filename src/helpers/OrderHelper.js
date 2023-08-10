@@ -68,5 +68,5 @@ export async function setStatus(id, status){
 }
 
 export function getLearningType(learningType){
-    return learningType = learningType.split(' ').map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')
+    return learningType.split(' ').map((v) => v === 'full-time' ? 'Очно' : 'Онлайн').join(', ')
 }

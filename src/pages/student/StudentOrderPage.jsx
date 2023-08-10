@@ -3,7 +3,14 @@ import '../../styles/Student/StudentCreateOrder.scss'
 import avatar from '../../img/avatar.jpg'
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {deleteOrder, editOrder, getOrderById, getRespondsByOrderId, setStatus} from "../../helpers/OrderHelper";
+import {
+    deleteOrder,
+    editOrder,
+    getLearningType,
+    getOrderById,
+    getRespondsByOrderId,
+    setStatus
+} from "../../helpers/OrderHelper";
 import Modal from "../../components/Modal";
 import {getCompetencies} from "../../helpers/UserHelper";
 
@@ -61,7 +68,7 @@ export default function StudentOrderPage(){
                 </div>
                 <p className="order__description">{order.description}</p>
                 <div className="order__footer">
-                    <p className='order__learning-type'>{order.learning_type}</p>
+                    <p className='order__learning-type'>{getLearningType(order.learning_type)}</p>
                     <p className='order__price'>{order.price} &#8381;</p>
                 </div>
                 <button className='order__delete' onClick={() => {
